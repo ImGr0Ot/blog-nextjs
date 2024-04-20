@@ -6,11 +6,6 @@ export const getBlogs = async (req, res) => {
   const blogs = await Blog.find();
   res.json(blogs);
 };
-export const getBlogsByCategories = async (req, res) => {
-  const blogs = await Blog.find({ category: req.params.category });
-  if (!blogs) return res.status(404).json({ message: "Blogs not found" });
-  res.json(blogs);
-};
 
 export const createBlog = async (req, res) => {
   const { title, text, date, category, imgUrl, user } = req.body;
