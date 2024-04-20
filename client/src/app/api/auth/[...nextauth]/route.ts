@@ -2,6 +2,7 @@ import NextAuth, { User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios, { AxiosError } from "axios";
 import { UserType } from "@/app/utils/types";
+import { BEUrl } from "../../blog";
 
 const handler = NextAuth({
   pages: {
@@ -17,10 +18,7 @@ const handler = NextAuth({
       },
       async authorize(credentials, res) {
         try {
-          const resBackend = await axios.post(
-            `${process.env.API_URL}/login`,
-            credentials
-          );
+          const resBackend = await axios.post(`${BEUrl}/login`, credentials);
           if (res instanceof AxiosError) {
             throw new Error(JSON.stringify({ error: resBackend.data.message }));
           }

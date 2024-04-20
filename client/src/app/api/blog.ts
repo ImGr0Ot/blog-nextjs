@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Blog } from "../context/BlogContext";
 
-const BEUrl = process.env.API_URL || "http://localhost:4000";
+export const BEUrl = process.env.API_URL || "http://localhost:4000";
 
 export const getBlogs = async () => axios.get(`${BEUrl}/blogs`);
 export const getBlog = async (blogId: string) =>
