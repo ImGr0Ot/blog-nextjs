@@ -21,11 +21,7 @@ export const createBlog = async (req, res) => {
   const blogSaved = await newBlog.save();
   res.json(blogSaved);
 };
-export const getBlog = async (req, res) => {
-  const blog = await Blog.findById(req.params.blogId);
-  if (!blog) return res.status(404).json({ message: "Blog not found" });
-  res.json(blog);
-};
+
 export const deleteBlog = async (req, res) => {
   const blog = await Blog.findByIdAndDelete(req.params.blogId);
   if (!blog) return res.status(404).json({ message: "Blog not found" });
