@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { TOKEN_SECRET } from "../config.js";
+import { TOKEN_SECRET } from "../../config.js";
 
 export const getUsers = async (req, res) => {
   const users = await User.find();

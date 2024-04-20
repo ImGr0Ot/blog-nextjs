@@ -1,8 +1,8 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import authRoutes from "./routes/auth.routes.js";
-import blogRoutes from "./routes/blogs.routes.js";
+import authRoutes from "./src/routes/auth.routes.js";
+import blogRoutes from "./src/routes/blogs.routes.js";
 import cors from "cors";
 
 const app = express();
