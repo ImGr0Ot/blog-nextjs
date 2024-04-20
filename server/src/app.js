@@ -6,7 +6,7 @@ import blogRoutes from "./routes/blogs.routes.js";
 import cors from "cors";
 
 const app = express();
-
+app.get("/", (res) => res.send("Express on Vercel"));
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
