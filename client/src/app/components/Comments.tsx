@@ -1,9 +1,13 @@
+"use client"
 import Link from "next/link"
 import React from "react"
 import Image from "next/image"
 
+
+import { useSession } from "next-auth/react"
+
 const Comments = () => {
-	const status = "authenticated"
+	const { data: session, status } = useSession()
 	return (
 		<>
 			<div>

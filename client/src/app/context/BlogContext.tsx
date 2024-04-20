@@ -3,13 +3,13 @@ import { createContext, useState, useContext } from "react"
 import { getBlogs } from "../api/blog"
 
 export type Blog = {
-	_id: String
 	title: String
 	text: String
 	imgUrl: String
 	category: String
 	date: Date
 	user: String
+	updated: Boolean
 }
 type blogContextType = {
 	blogs: Blog[]
