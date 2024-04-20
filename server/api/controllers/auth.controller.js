@@ -70,6 +70,14 @@ export const login = async (req, res) => {
   }
 };
 
+export const logout = async (req, res) => {
+  req.token = "";
+  res.cookie("token", "");
+  res.json({
+    message: "Logout success",
+  });
+};
+
 export const update = async (req, res) => {
   try {
     const { imgUrl } = req.body;

@@ -14,7 +14,11 @@ const router = Router();
 
 router.get("/blogs", getBlogs);
 
+router.get("/blogs/:category", getBlogsByCategories);
+
 router.post("/blogs", createBlog);
+
+router.get("/blog/:blogId", getBlog);
 
 router.put("/blog/:blogId", updateBlog);
 
