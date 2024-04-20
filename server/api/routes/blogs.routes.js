@@ -1,31 +1,31 @@
-import { Router } from "express"
+import { Router } from "express";
 import {
-	createBlog,
-	deleteBlog,
-	getBlog,
-	getBlogs,
-	updateBlog,
-	createComment,
-	getCommentsByBlog,
-	getBlogsByCategories,
-} from "../controllers/blogs.controller.js"
+  createBlog,
+  deleteBlog,
+  getBlog,
+  getBlogs,
+  updateBlog,
+  createComment,
+  getCommentsByBlog,
+  getBlogsByCategories,
+} from "../controllers/blogs.controller.js";
 
-const router = Router()
+const router = Router();
 
-router.get("/blogs", getBlogs)
+router.get("/blogs", getBlogs);
 
-router.get("/blogs/:category", getBlogsByCategories)
+router.get("/blogs/:category", getBlogsByCategories);
 
-router.post("/blogs", createBlog)
+router.post("/blogs", createBlog);
 
-router.get("/blog/:blogId", getBlog)
+router.get("/blog/:blogId", getBlog);
 
-router.put("/blog/:blogId", updateBlog)
+router.put("/blog/:blogId", updateBlog);
 
-router.delete("/blogs/:blogId", deleteBlog)
+router.delete("/blogs/:blogId", deleteBlog);
 
-router.post("/comment", createComment)
+router.post("/comment", createComment);
 
-router.get("/comments/:blogId", getCommentsByBlog)
+router.get("/comments/:blogId", getCommentsByBlog);
 
-export default router
+export default router;
