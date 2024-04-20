@@ -1,11 +1,11 @@
 {
-  "name": "mern-crud-auth-master",
+  "name": "blog-nextjs-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
