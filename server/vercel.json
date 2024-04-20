@@ -10,7 +10,7 @@
   "redirects": [
     { "source": "/(.*)", "destination": "/index.html", "statusCode": 200 }
   ],
-  "typescript": {},
+
   "routes": [{ "src": "/(.*)", "dest": "/index.html" }],
   "images": {},
   "preview": {},
