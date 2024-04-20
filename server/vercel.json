@@ -1,4 +1,20 @@
 {
   "version": 2,
-  "rewrites": [{ "source": "/(.*)", "destination": "./" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "./index.js" }],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+    }
+  ],
+  "redirects": [
+    { "source": "/(.*)", "destination": "/index.html", "statusCode": 200 }
+  ],
+  "typescript": {},
+  "routes": [{ "src": "/(.*)", "dest": "/index.html" }],
+  "images": {},
+  "preview": {},
+  "env": {},
+  "builds": [{ "src": "/(.*)", "use": "@vercel/node" }],
+  "rewrites_manual": [{ "source": "/(.*)", "destination": "./index.js" }]
 }
