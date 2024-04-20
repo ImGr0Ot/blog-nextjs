@@ -2,8 +2,8 @@ import { connectDB } from "./db.js";
 import express from "express";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import authRoutes from "./src/routes/auth.routes.js";
-import blogRoutes from "./src/routes/blogs.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+import blogRoutes from "./routes/blogs.routes.js";
 import cors from "cors";
 
 await connectDB();
