@@ -6,7 +6,6 @@ import {
   logout,
   register,
   getUsers,
-  verifyToken,
   update,
 } from "../controllers/auth.controller.js";
 
