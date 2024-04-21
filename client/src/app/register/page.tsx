@@ -39,6 +39,7 @@ const Register = () => {
         "Password: Must have at least 1 especial character, 1 number, 1 mayus and minus character"
       ),
   });
+  const [loading, setLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
   const storage = getStorage(app);
   const router = useRouter();
@@ -252,10 +253,17 @@ const Register = () => {
       <p>
         {" "}
         Already have an account ? &nbsp;
-        <Link className="font-bold" href={"/login"}>
+        <button
+          className="font-bold"
+          onClick={() => {
+            setLoading(true), router.push("/login");
+          }}
+        >
           {" "}
-          <span className="hover:underline">Sign in</span>
-        </Link>{" "}
+          <span className="hover:underline">
+            {loading ? "Redirecting..." : "Log in"}
+          </span>
+        </button>{" "}
       </p>
     </form>
   );

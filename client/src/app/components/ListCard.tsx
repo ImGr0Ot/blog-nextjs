@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useBlogContext } from "../context/BlogContext";
 import moment from "moment";
 import { useRouter } from "next/navigation";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import { getAllUsers } from "../api/user";
 
@@ -17,7 +19,7 @@ export type UserType = {
 const ListCard = () => {
   //getting blogs
   const [users, setUsers] = useState<UserType[]>([]);
-
+  const [loading, setLoading] = useState(true);
   const { blogs, getAllBlogs } = useBlogContext();
   const router = useRouter();
   const blogsReversed = blogs
@@ -55,6 +57,7 @@ const ListCard = () => {
 
   useEffect(() => {
     getAllBlogs(), fetchDataUsers();
+    setLoading(false);
   }, []);
 
   return (
@@ -69,19 +72,34 @@ const ListCard = () => {
             onClick={() => handleOnclick(blog)}
             className="flex flex-col bg-white rounded-2xl gap-5"
           >
-            <div className="relative h-[300px]">
-              <Image
-                src={blog.imgUrl as string}
-                alt={"blog photo"}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-2xl"
-              />
-            </div>
+            {loading ? (
+              <div className="relative h-[300px] flex">
+                {" "}
+                <Skeleton
+                  containerClassName="flex-1"
+                  height={300}
+                  width={"100%"}
+                />
+              </div>
+            ) : (
+              <div className="relative h-[300px]">
+                <Image
+                  src={blog.imgUrl as string}
+                  alt={"blog photo"}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-2xl"
+                />
+              </div>
+            )}
 
             <div className="flex flex-col text-left p-5">
-              <h1 className="text-4xl"> {blog.title}</h1>
-              <p className="mt-3">{blog.text}</p>
+              <h1 className="text-4xl">
+                {loading ? <Skeleton height={40} width={150} /> : blog.title}
+              </h1>
+              <p className="mt-3">
+                {loading ? <Skeleton height={20} width={280} /> : blog.text}
+              </p>
               <div className="mt-5">
                 {users.map(
                   (userX) =>
@@ -89,36 +107,57 @@ const ListCard = () => {
                       <div key={userX.email as string} className="inline-flex">
                         {userX.imgUrl ? (
                           <div className="relative h-10 w-10">
-                            <Image
-                              className="rounded-full cursor-none"
-                              src={userX.imgUrl as string}
-                              alt={"user logo"}
-                              layout="fill"
-                              objectFit="cover"
-                            />
+                            {loading ? (
+                              <Skeleton circle width={"100%"} height={"100%"} />
+                            ) : (
+                              <Image
+                                className="rounded-full cursor-none"
+                                src={userX.imgUrl as string}
+                                alt={"user logo"}
+                                layout="fill"
+                                objectFit="cover"
+                              />
+                            )}
                           </div>
                         ) : (
                           <div className="relative h-10 w-10">
-                            <Image
-                              className="rounded-full cursor-none"
-                              src={"/defaultUser.png"}
-                              alt={"user logo"}
-                              layout="fill"
-                              objectFit="cover"
-                            />
+                            {loading ? (
+                              <Skeleton circle />
+                            ) : (
+                              <Image
+                                className="rounded-full cursor-none"
+                                src={"/defaultUser.png"}
+                                alt={"user logo"}
+                                layout="fill"
+                                objectFit="cover"
+                              />
+                            )}
                           </div>
                         )}
-                        <span className="ml-2 mt-2">{userX.username}</span>
+                        <span className="ml-2 mt-2">
+                          {loading ? (
+                            <Skeleton height={20} width={80} />
+                          ) : (
+                            userX.username
+                          )}{" "}
+                        </span>
                       </div>
                     )
                 )}
               </div>
+
               <div className="mt-2">
-                {blog.updated ? "Updated" : "Created"}&nbsp;
-                {moment(new Date(blog.date)).fromNow()} - &nbsp;
-                <span className={getCategoryColor(blog.category)}>
-                  {blog.category}
-                </span>
+                {loading ? (
+                  <Skeleton height={20} width={300} />
+                ) : (
+                  <div>
+                    {blog.updated ? "Updated" : "Created"}&nbsp;
+                    {moment(new Date(blog.date)).fromNow()} - &nbsp;
+                    <span className={getCategoryColor(blog.category)}>
+                      {blog.category}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -24,6 +24,7 @@ const Login = () => {
         "Password: Must have at least 1 especial character, 1 number, 1 mayus and minus character"
       ),
   });
+  const [loading, setLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [apiError, setApiError] = useState<String[]>([]);
   const {
@@ -147,10 +148,17 @@ const Login = () => {
       <p>
         {" "}
         Already have an account ? &nbsp;
-        <Link className="font-bold" href={"/register"}>
+        <button
+          className="font-bold"
+          onClick={() => {
+            setLoading(true), router.push("/register");
+          }}
+        >
           {" "}
-          <span className="hover:underline">Sign up</span>
-        </Link>{" "}
+          <span className="hover:underline">
+            {isPending ? "Redirecting..." : "Sign up"}
+          </span>
+        </button>{" "}
       </p>
     </form>
   );

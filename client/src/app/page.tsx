@@ -1,26 +1,32 @@
 import Image from "next/image";
 import Categories from "./components/Categories";
 import ListCard from "./components/ListCard";
-
+import Skeleton from "react-loading-skeleton";
 export default function Home() {
   return (
     <>
       <div className="flex flex-col lg:flex lg:flex-row bg-white rounded-2xl gap-5 xl:gap-12">
-        <div className="md:flex justify-start">
-          <Image
-            src={"/Hero-Post-Image.jpg"}
-            alt={"hero photo"}
-            width={900}
-            height={900}
-            className="rounded-2xl"
-          />
-        </div>
+        {(
+          <div className="lg:flex">
+            <Image
+              src={"/Hero-Post-Image.jpg"}
+              alt={"hero photo"}
+              width={900}
+              height={900}
+              className="rounded-2xl"
+            />
+          </div>
+        ) || (
+          <div className="lg:flex lg:flex-row lg:w-1/2">
+            <Skeleton width={"100%"} height={500} containerClassName="flex-1" />
+          </div>
+        )}
 
         <div className="flex-col lg:flex justify-end lg:justify-center p-5 pl-0 text-left ml-8">
           <h1 className="text-4xl">
             {" "}
-            <span className="font-bold">Hello friend, </span> make or see an
-            incredible post.
+            <span className="font-bold">Hello friend, </span>make or see
+            incredible posts
           </h1>
           <p className="mt-3">
             Use your imagination on our website to create incredible ones, you

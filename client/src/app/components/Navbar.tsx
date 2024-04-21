@@ -57,7 +57,7 @@ const Navbar = () => {
             <div
               className={
                 menuOpen
-                  ? "fixed lg:hidden right-8 top-5 rounded-xl text-[12px]  w-[200px] h-[180px] duration-500 mx-12 sm:mx-20"
+                  ? "fixed lg:hidden right-8 top-5 rounded-xl text-[12px]  w-[200px] h-[180px] duration-500 mx-12 sm:mx-20 z-10"
                   : "fixed left-[-100%]"
               }
             >
