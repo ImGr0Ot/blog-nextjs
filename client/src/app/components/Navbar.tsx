@@ -189,8 +189,8 @@ const Navbar = () => {
           {status === "authenticated" ? (
             <button
               onClick={() =>
-                startTransition(() => {
-                  handleLogout;
+                startTransition(async () => {
+                  await handleLogout();
                   router.push("/");
                 })
               }

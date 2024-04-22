@@ -156,7 +156,7 @@ const Login = () => {
         >
           {" "}
           <span className="hover:underline">
-            {isPending ? "Redirecting..." : "Sign up"}
+            {loading ? "Redirecting..." : "Sign up"}
           </span>
         </button>{" "}
       </p>

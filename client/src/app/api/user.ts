@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios";
-import { UserType } from "../utils/types";
 
 const BEUrl = process.env.API_URL || "http://localhost:4000";
 
