@@ -6,7 +6,7 @@ import { BEUrl } from "../../blog";
 
 const handler = NextAuth({
   pages: {
-    signIn: "login",
+    signIn: "/login",
   },
   session: { strategy: "jwt" },
   providers: [
