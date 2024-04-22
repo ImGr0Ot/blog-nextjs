@@ -18,7 +18,7 @@ const handler = NextAuth({
       },
       async authorize(credentials, res) {
         try {
-          const resBackend = await axios.post(`${BEUrl}/login`, credentials);
+          const resBackend = await axios.post(`${BEUrl}login`, credentials);
           if (res instanceof AxiosError) {
             throw new Error(JSON.stringify({ error: resBackend.data.message }));
           }
