@@ -6,7 +6,7 @@ import React, { useState, useTransition } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-
+import { ClipLoader } from "react-spinners";
 const Navbar = () => {
   const [isPending, startTransition] = useTransition();
   const { data: session, status } = useSession();
@@ -63,67 +63,77 @@ const Navbar = () => {
                   className="hover:scale-125 duration-300 "
                 />
               </div>
+
               <div className="flex flex-col items-center text-[16px] gap-3 text-center">
-                <button
-                  onClick={() =>
-                    startTransition(() => {
-                      handleNav;
-                      router.push("/");
-                    })
-                  }
-                  className={
-                    pathName === "/"
-                      ? "font-bold ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32"
-                      : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32"
-                  }
-                >
-                  Home Page
-                </button>
-                {status === "authenticated" && (
-                  <button
-                    onClick={() =>
-                      startTransition(() => {
-                        handleNav;
-                        router.push("/create");
-                      })
-                    }
-                    className={
-                      pathName === "/create"
-                        ? "ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32 text-center"
-                        : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
-                    }
-                  >
-                    Create a post
-                  </button>
-                )}
-                {status === "authenticated" ? (
-                  <button
-                    onClick={() =>
-                      startTransition(async () => {
-                        await handleLogout();
-                        router.push("/");
-                      })
-                    }
-                    className="font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
-                  >
-                    Logout
-                  </button>
+                {isPending ? (
+                  <div className="flex  justify-center gap-3 font-bold ring-2 ring-slate-500 p-3 rounded-md min-w-48">
+                    <p>Redirecting</p>
+                    <ClipLoader color="gray" size={20} />
+                  </div>
                 ) : (
-                  <button
-                    onClick={() =>
-                      startTransition(() => {
-                        handleNav;
-                        router.push("/login");
-                      })
-                    }
-                    className={
-                      pathName === "/login"
-                        ? "ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32 text-center"
-                        : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
-                    }
-                  >
-                    Login
-                  </button>
+                  <>
+                    <button
+                      onClick={() =>
+                        startTransition(() => {
+                          handleNav;
+                          router.push("/");
+                        })
+                      }
+                      className={
+                        pathName === "/"
+                          ? "font-bold ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32"
+                          : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32"
+                      }
+                    >
+                      Home Page
+                    </button>
+                    {status === "authenticated" && (
+                      <button
+                        onClick={() =>
+                          startTransition(() => {
+                            handleNav;
+                            router.push("/create");
+                          })
+                        }
+                        className={
+                          pathName === "/create"
+                            ? "ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32 text-center"
+                            : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
+                        }
+                      >
+                        Create a post
+                      </button>
+                    )}
+                    {status === "authenticated" ? (
+                      <button
+                        onClick={() =>
+                          startTransition(async () => {
+                            await handleLogout();
+                            router.push("/");
+                          })
+                        }
+                        className="font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
+                      >
+                        Logout
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() =>
+                          startTransition(() => {
+                            handleNav;
+                            router.push("/login");
+                          })
+                        }
+                        className={
+                          pathName === "/login"
+                            ? "ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32 text-center"
+                            : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
+                        }
+                      >
+                        Login
+                      </button>
+                    )}
+                  </>
                 )}
               </div>
             </div>
@@ -156,93 +166,104 @@ const Navbar = () => {
           )}
         </div>
         <div className="lg:flex hidden items-center justify-end pt-2 cursor-pointer gap-6 md:mx-20">
-          <button
-            onClick={() =>
-              startTransition(() => {
-                router.push("/");
-              })
-            }
-            className={
-              pathName === "/"
-                ? "ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32 text-center"
-                : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 text-center"
-            }
-          >
-            Home Page
-          </button>
-          {status === "authenticated" && (
-            <button
-              onClick={() =>
-                startTransition(() => {
-                  router.push("/create");
-                })
-              }
-              className={
-                pathName === "/create"
-                  ? "ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32 text-center"
-                  : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
-              }
-            >
-              Create a post
-            </button>
-          )}
-          {status === "authenticated" ? (
-            <button
-              onClick={() =>
-                startTransition(async () => {
-                  await handleLogout();
-                  router.push("/");
-                })
-              }
-              className="font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
-            >
-              Logout
-            </button>
+          {isPending ? (
+            <div className="flex justify-center gap-3 font-bold ring-2 ring-slate-500 p-3 rounded-md min-w-48">
+              <p>Redirecting</p>
+              <ClipLoader color="gray" size={20} />
+            </div>
           ) : (
             <>
               <button
                 onClick={() =>
                   startTransition(() => {
-                    router.push("/login");
+                    router.push("/");
                   })
                 }
                 className={
-                  pathName === "/login"
+                  pathName === "/"
                     ? "ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32 text-center"
-                    : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
+                    : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 text-center"
                 }
               >
-                Login
+                Home Page
               </button>
+              {status === "authenticated" && (
+                <button
+                  onClick={() =>
+                    startTransition(() => {
+                      router.push("/create");
+                    })
+                  }
+                  className={
+                    pathName === "/create"
+                      ? "ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32 text-center"
+                      : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
+                  }
+                >
+                  Create a post
+                </button>
+              )}
+              {status === "authenticated" ? (
+                <button
+                  onClick={() =>
+                    startTransition(async () => {
+                      await handleLogout();
+                      router.push("/");
+                    })
+                  }
+                  className="font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={() =>
+                      startTransition(() => {
+                        router.push("/login");
+                      })
+                    }
+                    className={
+                      pathName === "/login"
+                        ? "ring-2 ring-slate-500 pointer-events-none cursor-none p-3 rounded-md min-w-32 text-center"
+                        : "font-bold hover:bg-opacity-15 hover:bg-slate-500 p-3 rounded-md duration-300 min-w-32 text-center"
+                    }
+                  >
+                    Login
+                  </button>
+                </>
+              )}
+              {status === "authenticated" && (
+                <div className="inline-flex">
+                  <div className="gap-2 relative h-10 w-10 ml-5">
+                    {session.user.imgUrl ? (
+                      <>
+                        <Image
+                          className="rounded-full cursor-none"
+                          src={session.user.imgUrl}
+                          alt={"user logo"}
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Image
+                          className="rounded-full cursor-none"
+                          src={"/defaultUser.png"}
+                          alt={"user logo"}
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </>
+                    )}
+                  </div>
+                  <h1 className="font-bold mt-2 ml-2">
+                    {session.user.username}
+                  </h1>
+                </div>
+              )}
             </>
-          )}
-          {status === "authenticated" && (
-            <div className="inline-flex">
-              <div className="gap-2 relative h-10 w-10 ml-5">
-                {session.user.imgUrl ? (
-                  <>
-                    <Image
-                      className="rounded-full cursor-none"
-                      src={session.user.imgUrl}
-                      alt={"user logo"}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <Image
-                      className="rounded-full cursor-none"
-                      src={"/defaultUser.png"}
-                      alt={"user logo"}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </>
-                )}
-              </div>
-              <h1 className="font-bold mt-2 ml-2">{session.user.username}</h1>
-            </div>
           )}
         </div>
       </div>

@@ -62,7 +62,7 @@ const ListCard = () => {
 
   return (
     <>
-      <h1 className="font-bold  mx-20 mt-12 text-center mb-5">Recent Posts</h1>
+      <h1 className="font-bold  mx-20 mt-12 text-center mb-5">All Posts</h1>
 
       {/*******************Here the new content********************/}
       <div className="cursor-pointer gap-16 grid xl:grid-cols-3 md:grid-cols-2  w-full my-10">

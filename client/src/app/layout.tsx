@@ -5,6 +5,8 @@ import Footer from "./components/Footer";
 import { BlogProvider } from "./context/BlogContext";
 import { NextAuthProvider } from "./NextAuthProvider";
 import { Metadata } from "next/types";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +27,7 @@ export default function RootLayout({
           <BlogProvider>
             <Navbar />
             {children}
+
             <Footer />
           </BlogProvider>
         </NextAuthProvider>

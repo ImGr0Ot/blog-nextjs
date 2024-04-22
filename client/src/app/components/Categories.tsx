@@ -2,7 +2,7 @@
 
 import React, { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import Loading from "../loading";
+import { ClipLoader } from "react-spinners";
 
 const Categories = () => {
   const router = useRouter();
@@ -20,7 +20,12 @@ const Categories = () => {
         Popular Categories
       </h1>
       {isPending ? (
-        <Loading />
+        <div className="flex justify-center  text-white">
+          <div className="flex justify-between items-center min-w-32 h-10 bg-slate-500 rounded-xl text-center p-2">
+            <p>Redirecting</p>
+            <ClipLoader color="white" size={20} />
+          </div>
+        </div>
       ) : (
         <div className="pl-10  inline-grid grid-cols-2 sm:grid-cols-3 md:flex md:justify-center gap-8">
           <button
