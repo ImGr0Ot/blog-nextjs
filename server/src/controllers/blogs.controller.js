@@ -4,12 +4,12 @@ import User from "../models/user.model.js";
 
 export const getBlogs = async (req, res) => {
   const blogs = await Blog.find();
-  res.json(blogs);
+  await res.json(blogs);
 };
 export const getBlogsByCategories = async (req, res) => {
   const blogs = await Blog.find({ category: req.params.category });
   if (!blogs) return res.status(404).json({ message: "Blogs not found" });
-  res.json(blogs);
+  await res.json(blogs);
 };
 
 export const createBlog = async (req, res) => {
@@ -24,17 +24,17 @@ export const createBlog = async (req, res) => {
   });
   console.log(imgUrl);
   const blogSaved = await newBlog.save();
-  res.json(blogSaved);
+  await res.json(blogSaved);
 };
 export const getBlog = async (req, res) => {
   const blog = await Blog.findById(req.params.blogId);
   if (!blog) return res.status(404).json({ message: "Blog not found" });
-  res.json(blog);
+  await res.json(blog);
 };
 export const deleteBlog = async (req, res) => {
   const blog = await Blog.findByIdAndDelete(req.params.blogId);
   if (!blog) return res.status(404).json({ message: "Blog not found" });
-  res.json(blog);
+  await res.json(blog);
 };
 
 export const updateBlog = async (req, res) => {
@@ -42,7 +42,7 @@ export const updateBlog = async (req, res) => {
     new: true,
   });
   if (!blog) return res.status(404).json({ message: "Blog not found" });
-  res.json(blog);
+  await res.json(blog);
 };
 export const createComment = async (req, res) => {
   try {
@@ -62,17 +62,17 @@ export const createComment = async (req, res) => {
     //saving a comment
 
     const commentSaved = await newComment.save();
-    res.json(commentSaved);
+    await res.json(commentSaved);
   } catch (error) {
     console.log(error);
   }
 };
 export const getComments = async (req, res) => {
   const comments = await Comment.find();
-  res.json(comments);
+  await res.json(comments);
 };
 
 export const getCommentsByBlog = async (req, res) => {
   const comments = await Comment.find({ blog: req.params.blogId });
-  res.json(comments);
+  await res.json(comments);
 };

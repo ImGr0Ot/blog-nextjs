@@ -5,7 +5,7 @@ import { TOKEN_SECRET } from "../config.js";
 
 export const getUsers = async (req, res) => {
   const users = await User.find();
-  res.json(users);
+  await res.json(users);
 };
 
 export const register = async (req, res) => {
@@ -34,7 +34,7 @@ export const register = async (req, res) => {
     const userSaved = await newUser.save();
     console.log(userSaved);
 
-    res.json({
+    await res.json({
       username: userSaved.username,
       email: userSaved.email,
     });
@@ -97,7 +97,7 @@ export const update = async (req, res) => {
       }
     );
 
-    res.status(200).json({
+    await res.status(200).json({
       username: userSaved.username,
       email: userSaved.email,
       imgUrl: userSaved.imgUrl,

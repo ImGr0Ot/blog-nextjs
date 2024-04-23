@@ -70,7 +70,9 @@ const ListCard = () => {
       await getAllBlogs(), await fetchDataUsers();
       setLoading(false);
     };
+
     fetchData();
+    console.log(blogs);
   }, []);
 
   return (
