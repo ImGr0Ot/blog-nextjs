@@ -1,13 +1,14 @@
 "use client";
 import { useState, useContext, useEffect } from "react";
 import Image from "next/image";
-import { useBlogContext } from "../context/BlogContext";
+import { Blog, useBlogContext } from "../context/BlogContext";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import { getAllUsers } from "../api/user";
+import { getBlogs } from "../api/blog";
 
 export type UserType = {
   _id: String;
@@ -20,7 +21,7 @@ const ListCard = () => {
   //getting blogs
   const [users, setUsers] = useState<UserType[]>([]);
   const [loading, setLoading] = useState(true);
-  const { blogs, getAllBlogs } = useBlogContext();
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const router = useRouter();
   const blogsReversed = blogs
     .slice(0)
@@ -28,6 +29,15 @@ const ListCard = () => {
     .map((element) => {
       return element;
     });
+
+  const getAllBlogs = async () => {
+    try {
+      const res = await getBlogs();
+      setBlogs(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleOnclick = (blog: any) => {
     router.push(`/posts/${blog._id}`);
@@ -56,8 +66,11 @@ const ListCard = () => {
   };
 
   useEffect(() => {
-    getAllBlogs(), fetchDataUsers();
-    setLoading(false);
+    const fetchData = async () => {
+      await getAllBlogs(), await fetchDataUsers();
+      setLoading(false);
+    };
+    fetchData();
   }, []);
 
   return (
