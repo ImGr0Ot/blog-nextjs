@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 
-const BEUrl = process.env.API_URL || "http://localhost:4000/";
+export const BEUrl = "https://blog-nextjs-sd0j.onrender.com/"; //process.env.API_URL || "http://localhost:4000/";
 
 export const registerRequest = async (user: any) => {
   try {

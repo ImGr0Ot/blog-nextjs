@@ -33,7 +33,8 @@ const ListCard = () => {
   const getAllBlogs = async () => {
     try {
       const res = await getBlogs();
-      setBlogs(res.data);
+      setBlogs(await res.data);
+      console.log(blogs);
     } catch (error) {
       console.log(error);
     }
@@ -45,8 +46,8 @@ const ListCard = () => {
 
   const fetchDataUsers = async () => {
     const res = await getAllUsers();
-
-    setUsers(res.data);
+    setUsers(await res.data);
+    setLoading(false);
   };
   const getCategoryColor = (category: String) => {
     switch (category) {
@@ -68,11 +69,9 @@ const ListCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       await getAllBlogs(), await fetchDataUsers();
-      setLoading(false);
     };
 
     fetchData();
-    console.log(blogs);
   }, []);
 
   return (
@@ -81,7 +80,7 @@ const ListCard = () => {
 
       {/*******************Here the new content********************/}
       <div className="cursor-pointer gap-16 grid xl:grid-cols-3 md:grid-cols-2  w-full my-10">
-        {blogsReversed.map((blog, index) => (
+        {blogs.map((blog, index) => (
           <div
             key={index}
             onClick={() => handleOnclick(blog)}
