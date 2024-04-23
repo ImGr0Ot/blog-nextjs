@@ -3,13 +3,13 @@ import { Blog } from "../context/BlogContext";
 
 export const BEUrl = process.env.API_URL || "http://localhost:4000/";
 
-export const getBlogs = async () => axios.get(`${BEUrl}blogs`);
+export const getBlogs = async () => await axios.get(`${BEUrl}blogs`);
 export const getBlog = async (blogId: string) =>
-  axios.get(`${BEUrl}blog/${blogId}`);
+  await axios.get(`${BEUrl}blog/${blogId}`);
 export const deleteBlog = async (blogId: string) =>
-  axios.delete(`${BEUrl}blogs/${blogId}`);
+  await axios.delete(`${BEUrl}blogs/${blogId}`);
 export const getBlogsByCategory = async (category: string) =>
-  axios.get(`${BEUrl}blogs/${category}`);
+  await axios.get(`${BEUrl}blogs/${category}`);
 export const updateBlog = async (blog: Blog, blogId: string) => {
   try {
     if (blog.imgUrl === "") {
@@ -21,7 +21,7 @@ export const updateBlog = async (blog: Blog, blogId: string) => {
           date: blog.date,
           updated: blog.updated,
         };
-        axios.put(`${BEUrl}blog/${blogId}`, newBlog);
+        await axios.put(`${BEUrl}blog/${blogId}`, newBlog);
       } else {
         const newBlog = {
           title: blog.title,
@@ -31,7 +31,7 @@ export const updateBlog = async (blog: Blog, blogId: string) => {
           date: blog.date,
           updated: blog.updated,
         };
-        axios.put(`${BEUrl}blog/${blogId}`, newBlog);
+        await axios.put(`${BEUrl}blog/${blogId}`, newBlog);
       }
     } else {
       if (blog.category === "") {
@@ -43,9 +43,9 @@ export const updateBlog = async (blog: Blog, blogId: string) => {
           date: blog.date,
           updated: blog.updated,
         };
-        axios.put(`${BEUrl}blog/${blogId}`, newBlog);
+        await axios.put(`${BEUrl}blog/${blogId}`, newBlog);
       } else {
-        axios.put(`${BEUrl}blog/${blogId}`, blog);
+        await axios.put(`${BEUrl}blog/${blogId}`, blog);
       }
     }
   } catch (error) {
@@ -54,16 +54,16 @@ export const updateBlog = async (blog: Blog, blogId: string) => {
 };
 
 //create a blog
-export const blogRequest = (blog: any) => {
+export const blogRequest = async (blog: any) => {
   try {
-    axios.post(`${BEUrl}blogs`, blog);
+    await axios.post(`${BEUrl}blogs`, blog);
   } catch (error) {
     console.log(error);
   }
 };
 
 export const getComments = async (blogId: string) =>
-  axios.get(`${BEUrl}comments/${blogId}`);
+  await axios.get(`${BEUrl}comments/${blogId}`);
 
-export const commentRequest = (comment: any) =>
-  axios.post(`${BEUrl}comment`, comment);
+export const commentRequest = async (comment: any) =>
+  await axios.post(`${BEUrl}comment`, comment);
