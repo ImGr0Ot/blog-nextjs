@@ -30,11 +30,10 @@ const Navbar = () => {
           <Link href={"/"}>
             <div>
               <Image
-                style={{ filter: "invert(70%)" }}
                 className="cursor-pointer"
-                src={"/GROOTLOGO-removebg--WHITE-VECTORIZADO-ARREGLADOsvg.svg"}
-                width={80}
-                height={80}
+                src={"/Logo.png"}
+                width={150}
+                height={150}
                 alt="logo"
               />
             </div>
